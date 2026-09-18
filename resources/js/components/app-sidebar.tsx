@@ -1,7 +1,16 @@
-import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import {
+    BellRing,
+    Eye,
+    FileText,
+    LayoutGrid,
+    Newspaper,
+    Rss,
+    ScrollText,
+    ShieldAlert,
+    Users,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -14,30 +23,37 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { index as audit } from '@/routes/admin/audit';
+import { index as users } from '@/routes/admin/users';
+import { index as alerts } from '@/routes/alerts';
+import { index as briefings } from '@/routes/briefings';
+import { index as incidents } from '@/routes/incidents';
+import { index as items } from '@/routes/items';
+import { index as sources } from '@/routes/sources';
+import { index as watchlist } from '@/routes/watchlist';
 import type { NavItem } from '@/types';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
-
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
-
 export function AppSidebar() {
+    const { auth, openAlerts } = usePage().props;
+
+    const mainNavItems: NavItem[] = [
+        { title: 'Dashboard', href: dashboard(), icon: LayoutGrid },
+        { title: 'Alerts', href: alerts(), icon: BellRing, badge: openAlerts },
+        { title: 'Feed', href: items(), icon: Newspaper },
+        { title: 'Incidents', href: incidents(), icon: ShieldAlert },
+        { title: 'Daily briefing', href: briefings(), icon: FileText },
+    ];
+
+    const analystNavItems: NavItem[] = [
+        { title: 'Sources', href: sources(), icon: Rss },
+        { title: 'Watchlist', href: watchlist(), icon: Eye },
+    ];
+
+    const adminNavItems: NavItem[] = [
+        { title: 'Users', href: users(), icon: Users },
+        { title: 'Audit log', href: audit(), icon: ScrollText },
+    ];
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -53,11 +69,16 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={mainNavItems} label="Monitoring" />
+                {auth.can.analyze && (
+                    <NavMain items={analystNavItems} label="Configure" />
+                )}
+                {auth.can.admin && (
+                    <NavMain items={adminNavItems} label="Admin" />
+                )}
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

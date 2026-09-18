@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\Role;
+use App\Models\Alert;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -40,7 +42,12 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'auth' => [
                 'user' => $request->user(),
+                'can' => [
+                    'analyze' => (bool) $request->user()?->canAnalyze(),
+                    'admin' => (bool) $request->user()?->hasRole(Role::Admin),
+                ],
             ],
+            'openAlerts' => fn () => $request->user() ? Alert::whereNull('acknowledged_at')->count() : 0,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

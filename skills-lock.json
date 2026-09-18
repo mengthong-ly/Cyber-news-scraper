@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "skills": {
+        "ai-research-explore": {
+            "source": "lllllllama/rigorpilot-skills",
+            "sourceType": "github",
+            "skillPath": "skills/ai-research-explore/SKILL.md",
+            "computedHash": "0fded4e9aeef0de63322b9f77504a16f790d4e71682a5065ecf48da6d68d1943"
+        },
+        "news-monitor": {
+            "source": "claude-office-skills/skills",
+            "sourceType": "github",
+            "skillPath": "news-monitor/SKILL.md",
+            "computedHash": "c096a1630cfbb3e44e8cc99b98eeea1557a393e340e6e5f6ae4b47a210d9b603"
+        },
+        "research": {
+            "source": "mattpocock/skills",
+            "sourceType": "github",
+            "skillPath": "skills/engineering/research/SKILL.md",
+            "computedHash": "c8c1cba327a6f824b554cd978079a3dadd7406d73174f8fb9bfef58824691970"
+        },
+        "the-news": {
+            "source": "sfkislev/the-news",
+            "sourceType": "github",
+            "skillPath": "SKILL.md",
+            "computedHash": "cd1f50e4007e7f41a005183c8683096b1a2c4121d4e34161b941c00b7b43ef48"
+        }
+    }
+}

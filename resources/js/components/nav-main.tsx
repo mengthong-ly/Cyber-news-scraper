@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import {
     SidebarGroup,
+    SidebarMenuBadge,
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
@@ -9,12 +10,18 @@ import {
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import type { NavItem } from '@/types';
 
-export function NavMain({ items }: { items: NavItem[] }) {
+export function NavMain({
+    items,
+    label = 'Platform',
+}: {
+    items: NavItem[];
+    label?: string;
+}) {
     const { isCurrentUrl } = useCurrentUrl();
 
     return (
         <SidebarGroup className="px-2 py-0">
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>{label}</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
                     <SidebarMenuItem key={item.title}>
@@ -28,6 +35,11 @@ export function NavMain({ items }: { items: NavItem[] }) {
                                 <span>{item.title}</span>
                             </Link>
                         </SidebarMenuButton>
+                        {!!item.badge && (
+                            <SidebarMenuBadge className="bg-red-600 text-white">
+                                {item.badge}
+                            </SidebarMenuBadge>
+                        )}
                     </SidebarMenuItem>
                 ))}
             </SidebarMenu>

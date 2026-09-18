@@ -31,6 +31,10 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="CYBER_REQUIRE_2FA" value="false"/>
+        <env name="CYBER_AI_ENABLED" value="false"/>
+        <env name="CYBER_GDELT_DELAY" value="0"/>
+        <env name="ANTHROPIC_API_KEY" value="test-key"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
     </php>
 </phpunit>
