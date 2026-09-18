@@ -145,7 +145,8 @@ class ItemIngestor
     private static function baseSeverity(string $category): int
     {
         return match ($category) {
-            'attack' => 3,
+            'ransomware', 'data_breach', 'ddos', 'attack' => 3,
+            'malware', 'phishing', 'scam',
             'crime', 'vulnerability', 'disinformation' => 2,
             default => 1,
         };

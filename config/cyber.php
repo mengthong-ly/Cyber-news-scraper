@@ -29,9 +29,16 @@ return [
 
     // First match wins (checked against the lowercase title); anything else is "general".
     'categories' => [
-        'attack' => ['ransomware', 'breach', 'ddos', 'malware', 'leak', 'hacked', 'cyberattack', 'cyber attack', 'vulnerability', 'exploit'],
-        'crime' => ['cybercrime', 'arrest', 'scam', 'fraud', 'dark web', 'phishing', 'police', 'charged', 'sentenced', 'extradit'],
-        'policy' => ['law', 'regulation', 'bill', 'strategy', 'cert', 'agency', 'minister', 'government', 'sanction', 'policy'],
+        'ransomware' => ['ransomware', 'ransom', 'lockbit', 'extortion'],
+        'data_breach' => ['breach', 'leak', 'exposed data', 'stolen data', 'personal data'],
+        'vulnerability' => ['vulnerab', 'cve-', 'zero-day', 'zero day', 'patch', 'exploit'],
+        'ddos' => ['ddos', 'denial of service', 'denial-of-service'],
+        'phishing' => ['phishing', 'smishing', 'credential theft'],
+        'malware' => ['malware', 'spyware', 'trojan', 'botnet', 'infostealer', 'stealer', 'backdoor'],
+        'scam' => ['scam', 'fraud', 'scam compound', 'pig butchering', 'investment scam'],
+        'attack' => ['hacked', 'hacker', 'cyberattack', 'cyber attack', 'defaced', 'intrusion', 'compromised'],
+        'crime' => ['cybercrime', 'arrest', 'dark web', 'police', 'charged', 'sentenced', 'extradit'],
+        'policy' => [' law', 'regulation', ' bill ', 'strategy', 'camcert', 'agency', 'minister', 'government', 'sanction', 'policy'],
         'disinformation' => ['disinformation', 'misinformation', 'fake news', 'deepfake', 'fake account', 'impersonat'],
         'innovation' => ['startup', 'launch', 'funding', 'raises', 'ai ', 'quantum', 'innovation', 'partnership', 'unveil', 'new tool'],
         'general' => [],

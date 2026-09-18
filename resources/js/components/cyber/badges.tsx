@@ -25,7 +25,7 @@ export function CategoryBadge({ category }: { category: string }) {
                 categoryStyles[category] ?? categoryStyles.general,
             )}
         >
-            {category}
+            {category.replace('_', ' ')}
         </Badge>
     );
 }

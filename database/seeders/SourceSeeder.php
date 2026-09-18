@@ -14,14 +14,14 @@ class SourceSeeder extends Seeder
     public function run(): void
     {
         // General outlets carry every topic, so they keep only cyber-related items (cyber_only).
-        $rss = fn (string $name, string $url, string $language, string $country, string $kind = 'news', int $interval = 30) => [
+        $rss = fn (string $name, string $url, string $language, string $country, string $kind = 'news', int $interval = 15) => [
             'name' => $name, 'type' => 'rss', 'interval_minutes' => $interval,
             'config' => ['url' => $url, 'language' => $language, 'country_code' => $country, 'kind' => $kind, 'cyber_only' => $kind === 'news'],
         ];
 
         // Google's KH editions redirect from some networks; switch hl/gl/ceid to km/KH/KH:km on a server in Cambodia if they work there.
         $site = fn (string $name, string $domain, string $country = 'KH') => [
-            'name' => $name, 'type' => 'google_news', 'interval_minutes' => 60,
+            'name' => $name, 'type' => 'google_news', 'interval_minutes' => 15,
             'config' => ['query' => "site:{$domain}", 'country_code' => $country, 'publisher' => $name, 'cyber_only' => true],
         ];
 

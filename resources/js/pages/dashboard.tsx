@@ -8,7 +8,9 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { WorldMap } from '@/components/ui/map';
 import { formatDate } from '@/lib/categories';
+import { countryCoords } from '@/lib/country-coords';
 import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { index as alertsIndex } from '@/routes/alerts';
@@ -41,6 +43,7 @@ type Props = {
 
 const numberFormat = new Intl.NumberFormat(undefined, { notation: 'compact' });
 const barColor = 'bg-sky-600 dark:bg-sky-400';
+const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 
 export default function Dashboard({
     stats,
@@ -58,6 +61,9 @@ export default function Dashboard({
             href: itemsIndex({ query: { category: name, cambodia: '1' } }),
         }))
         .sort((a, b) => b.total - a.total);
+    const countryTotals = Object.fromEntries(
+        topCountries.map((c) => [c.code, c]),
+    );
 
     return (
         <>
@@ -101,6 +107,34 @@ export default function Dashboard({
                         warn={stats.unhealthySources > 0}
                     />
                 </div>
+
+                <Card className="gap-4">
+                    <CardHeader>
+                        <CardTitle>Where the news comes from</CardTitle>
+                        <CardDescription>
+                            Items per country, last 7 days, linked to Cambodia.
+                            Faint dots are monitored countries with no items
+                            yet.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <WorldMap
+                            targetId="KH"
+                            pins={Object.entries(countryCoords).map(
+                                ([code, [lat, lng]]) => ({
+                                    id: code,
+                                    lat,
+                                    lng,
+                                    label:
+                                        countryTotals[code]?.name ??
+                                        regionNames.of(code) ??
+                                        code,
+                                    value: countryTotals[code]?.total ?? 0,
+                                }),
+                            )}
+                        />
+                    </CardContent>
+                </Card>
 
                 <div className="grid gap-4 lg:grid-cols-3">
                     <Card className="gap-4 lg:col-span-2">
@@ -173,7 +207,7 @@ export default function Dashboard({
                     />
                     <RankedCard
                         title="Most active countries"
-                        rows={topCountries.map((c) => ({
+                        rows={topCountries.slice(0, 8).map((c) => ({
                             ...c,
                             href: itemsIndex({ query: { country: c.code } }),
                         }))}

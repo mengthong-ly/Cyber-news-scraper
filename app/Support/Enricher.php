@@ -22,7 +22,7 @@ class Enricher
     - is_cambodia: true only if the item concerns Cambodia, Cambodian organisations, people in Cambodia, Cambodian (.kh) systems, or threats explicitly targeting Cambodia.
     - title_en: the title in natural English (translate from Khmer or any other language; keep it unchanged if already English).
     - summary_en: 1–3 factual sentences in English. No speculation beyond the item.
-    - category: attack (intrusions, ransomware, DDoS, leaks, defacements), crime (scams, fraud, arrests, online crime), policy (laws, strategy, government action), innovation (products, research, funding), vulnerability (flaws, patches, CVEs), disinformation (fake accounts, impersonation, influence operations), or general.
+    - category: ransomware, data_breach (leaks, exposed or stolen data), ddos, malware (spyware, botnets, stealers), phishing, scam (online fraud, scam compounds), attack (other intrusions, defacements, hacks), crime (arrests, prosecutions, dark web), policy (laws, strategy, government action), innovation (products, research, funding), vulnerability (flaws, patches, CVEs), disinformation (fake accounts, impersonation, influence operations), or general.
     - severity 1–5 from Cambodia's defensive point of view: 5 = active attack or data leak affecting a Cambodian government or critical organisation; 4 = credible threat, exploited vulnerability, or impersonation targeting Cambodian institutions; 3 = significant regional or global cyber event; 2 = notable news; 1 = background.
     - entities: organisations, domains, CVE IDs and named threat actors mentioned in the item (empty lists if none). Do not include private individuals.
     - confidence: how sure you are of the labels.

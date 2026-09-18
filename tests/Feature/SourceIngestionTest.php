@@ -149,7 +149,7 @@ class SourceIngestionTest extends TestCase
         $item = Item::sole();
         $this->assertSame('Scam ring busted', $item->title);
         $this->assertSame('https://news.google.com/rss/articles/x', $item->url);
-        $this->assertSame('crime', $item->category);
+        $this->assertSame('scam', $item->category);
         Http::assertSent(fn ($request) => str_contains(urldecode($request->url()), 'site:example.com when:1d'));
     }
 

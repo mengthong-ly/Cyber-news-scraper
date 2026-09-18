@@ -51,7 +51,7 @@ class DashboardController extends Controller
             ]),
             'topCountries' => $recent()->whereNotNull('country_code')
                 ->select('country_code', DB::raw('count(*) as total'))
-                ->groupBy('country_code')->orderByDesc('total')->limit(8)->get()
+                ->groupBy('country_code')->orderByDesc('total')->get()
                 ->map(fn ($row) => ['code' => $row->country_code, 'name' => $countries[$row->country_code] ?? $row->country_code, 'total' => $row->total]),
             'topActors' => $actors->map(fn ($total, $name) => ['name' => $name, 'total' => $total])->values(),
             'latestAlerts' => Alert::with('item:id,title,title_en,url,publisher')->whereNull('acknowledged_at')

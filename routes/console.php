@@ -11,7 +11,7 @@ Artisan::command('inspire', function () {
 
 Schedule::command('sources:dispatch')->everyMinute()->withoutOverlapping();
 
-Schedule::command('enrich:submit')->everyThirtyMinutes()->withoutOverlapping();
+Schedule::command('enrich:submit')->everyTenMinutes()->withoutOverlapping();
 Schedule::command('enrich:collect')->everyFiveMinutes()->withoutOverlapping();
 
 Schedule::command('briefing:generate')

@@ -46,7 +46,10 @@ class Item extends Model
 
     public const KINDS = ['news', 'advisory', 'vulnerability', 'threat', 'social'];
 
-    public const CATEGORIES = ['attack', 'crime', 'policy', 'innovation', 'vulnerability', 'disinformation', 'general'];
+    public const CATEGORIES = [
+        'ransomware', 'data_breach', 'ddos', 'malware', 'phishing', 'scam', 'attack', 'crime',
+        'vulnerability', 'disinformation', 'policy', 'innovation', 'general',
+    ];
 
     /** Severity at or above which a Cambodia-related item raises an alert. */
     public const ALERT_SEVERITY = 4;
@@ -107,9 +110,9 @@ class Item extends Model
             ->when($filters['from'] ?? null, fn ($q, $v) => $q->whereDate('published_at', '>=', $v))
             ->when($filters['to'] ?? null, fn ($q, $v) => $q->whereDate('published_at', '<=', $v))
             ->when($filters['q'] ?? null, fn ($q, $v) => $q->where(fn ($q) => $q
-                ->where('title', 'like', "%{$v}%")
-                ->orWhere('title_en', 'like', "%{$v}%")
-                ->orWhere('summary_en', 'like', "%{$v}%")));
+                ->whereLike('title', "%{$v}%")
+                ->orWhereLike('title_en', "%{$v}%")
+                ->orWhereLike('summary_en', "%{$v}%")));
     }
 
     /**

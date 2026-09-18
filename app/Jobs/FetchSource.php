@@ -23,7 +23,10 @@ class FetchSource implements ShouldBeUnique, ShouldQueue
 
     public int $uniqueFor = 3600;
 
-    public function __construct(public Source $source) {}
+    public function __construct(public Source $source)
+    {
+        $this->onQueue($source->type === 'global_news' ? 'slow' : 'default');
+    }
 
     public function uniqueId(): string
     {

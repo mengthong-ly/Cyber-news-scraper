@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Item;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class DashboardTest extends TestCase
@@ -23,5 +25,18 @@ class DashboardTest extends TestCase
 
         $response = $this->get(route('dashboard'));
         $response->assertOk();
+    }
+
+    public function test_the_map_gets_every_country_with_recent_items()
+    {
+        $codes = ['KH', 'US', 'TH', 'VN', 'FR', 'JP', 'DE', 'GB', 'SG', 'IN'];
+
+        foreach ($codes as $code) {
+            Item::factory()->create(['country_code' => $code]);
+        }
+
+        $this->actingAs(User::factory()->create())
+            ->get(route('dashboard'))
+            ->assertInertia(fn (Assert $page) => $page->has('topCountries', count($codes)));
     }
 }
